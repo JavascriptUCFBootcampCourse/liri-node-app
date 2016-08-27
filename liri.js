@@ -48,7 +48,7 @@ function twitter() {
 	 	//IF AN ERROR HAPPENS...
 	 	if (error) {
 
-	 		// RETURN THE FOLLOWING
+	 		// CONSOLE LOG THAT AN ERROR OCCURED AND DISPLAY THAT TO THE USER
 		    console.log('Error occurred: ' + error);
 		    return;
 		}
@@ -77,7 +77,7 @@ function spotify() {
 	    //IF ERROR OCCURS
 	    if (error) {
 
-	    	// RETURN THE FOLLOWING
+	    	// CONSOLE LOG THE ERROR AND RETURN THAT INFORMATION TO THE USER
 	        console.log('Error occurred: ' + error);
 	        return;
 	    }
@@ -111,10 +111,14 @@ function movie() {
 	//GET MOVIE PACKAGE
 	var request = require('request');
 
+	// IF USER DOESNT PASS ANY VALUE RETURN MR.NOBODY
 	if(parameter == null) {
 		
 		var movieName = "Mr. Nobody";
+
 	}
+
+	// OTHERWISE, PASS THE PARAMATER THEY ARE USING
 	else {
 
 		var movieName = parameter;
@@ -139,8 +143,10 @@ function movie() {
 		//IF NO ERROR
 		if (!error && response.statusCode == 200) {
 
-			//PARSE THE DATA AND RETURN THE FOLLOWING CONSOLE.LOG
+			//PARSE THE DATA 
 			var grabData = JSON.parse(data);
+
+			// CONSOLE LOG THE INFORMATION AND DISPLAY IT TO THE USER
 			console.log(grabData.Title + " (" + grabData.Year + "), Rated: " + grabData.Rated + ". Filmed in: " + grabData.Country + ". Language: " + grabData.Language + 
 				". Plot: " + grabData.Plot + " Starring: " + grabData.Actors + ". Rotten Tomatoes Rating: " + grabData.tomatoUserMeter + ", Rotten Tomatoes URL: " + grabData.tomatoURL);
 		}
@@ -150,11 +156,9 @@ function movie() {
 //DO WHAT IT SAYS FUNCTIONALITY
 function doIt() {
 
-	console.log("In doIt");
-
 	var fs = require('fs');
 
-	//STORES THE CONTENTS OF THE READING INSIDE THE VAR "DATA" 
+	//TAKE WHAT IS IN THE RANDOM.TXT FILE AND SPLIT IT INTO AN ARRAY
 	fs.readFile("random.txt", "utf8", function(error, data) {        
         var split = data.split(',')
         
